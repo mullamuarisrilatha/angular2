@@ -25,7 +25,11 @@
 
             // other libraries
             'rxjs': 'npm:rxjs',
-            'tslib': 'npm:tslib/tslib.js'
+            'tslib': 'npm:tslib/tslib.js',
+            '@agm/core': 'npm:@agm/core/core.umd.js'
+
+
+
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
@@ -34,8 +38,17 @@
                 defaultExtension: 'js'
             },
             rxjs: {
-                defaultExtension: 'js'
-            }
+                defaultExtension: 'js',
+                 main: 'Rx.js'
+            },
+            "@agm/core": {
+        "defaultExtension": "js"
+
+      }
+
         }
     });
+
+    
+
 })(this);

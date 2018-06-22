@@ -2,38 +2,35 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
-// used to create fake backend
-import { fakeBackendProvider } from './_helpers/index';
-
+import { fakeBackendProvider } from './helpers/index';
 import { AppComponent }  from './app.component';
 import { routing }        from './app.routing';
+import { AuthGuard }                          from './guards/index';
+import { JwtInterceptor }                     from './helpers/index';
+import { AuthenticationService, UserService } from './services/index';
+import { HomeComponent }                      from './home/index';
+import { LoginComponent }                     from './login/index';
+import { RegisterComponent }                  from './register/index';
 
-import { AlertComponent } from './_directives/index';
-import { AuthGuard } from './_guards/index';
-import { JwtInterceptor } from './_helpers/index';
-import { AlertService, AuthenticationService, UserService } from './_services/index';
-import { HomeComponent } from './home/index';
-import { LoginComponent } from './login/index';
-import { RegisterComponent } from './register/index';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
         HttpClientModule,
-        routing
+        routing,AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDjXissLhtGAQOGn7wgkKhc5Ecfxkeq9oM'
+    })
     ],
     declarations: [
         AppComponent,
-        AlertComponent,
         HomeComponent,
         LoginComponent,
         RegisterComponent
     ],
     providers: [
         AuthGuard,
-        AlertService,
         AuthenticationService,
         UserService,
         {
@@ -41,8 +38,6 @@ import { RegisterComponent } from './register/index';
             useClass: JwtInterceptor,
             multi: true
         },
-
-        // provider used to create fake backend
         fakeBackendProvider
     ],
     bootstrap: [AppComponent]
